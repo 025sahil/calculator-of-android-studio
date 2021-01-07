@@ -11,9 +11,10 @@ import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    public String text="";
-    public Integer a=0;
-    public String b="";
+    public String text="",h="";
+    public float a=0;
+    public float e,f,g;
+    public String b,c,d="";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,44 +122,114 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.sub:
                 if (a==0){
-                text=text+"-";
-                screen.setText(text);
+                    b=text;
+                    c="-";
+                    text=text+"-";
+                    screen.setText(text);
                     a++;
-                    b= (String) getText(R.id.scree);
                 }
-
                 break;
             case R.id.multiply:
-                text=text+"X";
-                screen.setText(text);
+                if (a==0){
+                    b=text;
+                    c="X";
+                    text=text+"X";
+                    screen.setText(text);
+                    a++;
+                }
                 break;
             case R.id.divide:
-                text=text+"÷";
-                screen.setText(text);
+                if (a==0){
+                    b=text;
+                    c="÷";
+                    text=text+"÷";
+                    screen.setText(text);
+                    a++;
+                }
                 break;
             case R.id.percent:
                 text=text+"%";
+                d=text;
+                d=d.replace("%","");
+                e=Float.parseFloat(d);
+                e=e/100;
+                h=Float.toString(e);
+                text=h;
                 screen.setText(text);
                 break;
             case R.id.bracket:
                 break;
             case R.id.negative:
+                e=Float.parseFloat(text);
+                e=e*(-1);
+                h=Float.toString(e);
+                text=h;
+                screen.setText(text);
                 break;
             case R.id.point:
+                if(text.contains(".")==false){
                 text=text+".";
-                screen.setText(text);
+                screen.setText(text);}
+                if(a!=0){
+                    d=text;
+                    d=d.replaceFirst(b,"");
+                    d=d.replace(c,"");
+                    if (d.contains(".")==false){
+                        text=text+".";
+                        screen.setText(text);
+                    }
+                    }
                 break;
 
             case R.id.rotate:
                 break;
             case R.id.clear:
-                break;
-            case R.id.add:
-                text=text+"+";
+                text="";
                 screen.setText(text);
                 break;
+            case R.id.add:
+                if (a==0){
+                    b=text;
+                    c="+";
+                    text=text+"+";
+                    screen.setText(text);
+                    a++;
+                }
+                break;
             case R.id.equal:
+                d=text;
+                d=d.replaceFirst(b,"");
+                d=d.replace(c,"");
+                screen.setText(d);
+                e=Float.parseFloat(b);
+                f=Float.parseFloat(d);
+                switch (c){
 
+                    case "-":
+                         g=e-f;
+                         h=Float.toString(g);
+                         screen.setText(h);
+                         break;
+                    case "+":
+                        g=e+f;
+                        h=Float.toString(g);
+                        screen.setText(h);
+                        break;
+                    case "X":
+                        g=e*f;
+                        h=Float.toString(g);
+                        screen.setText(h);
+                        break;
+                    case "÷":
+                        g=e/f;
+                        h=Float.toString(g);
+                        screen.setText(h);
+                        break;
+                    default:
+                         throw new IllegalStateException("Unexpected value: " + c);
+                          }
+                 a=0;
+                text=h;
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + v.getId());
