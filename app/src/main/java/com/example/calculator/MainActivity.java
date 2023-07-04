@@ -13,8 +13,8 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public String text="",h="";
     public float a=0;
-    public float e,f,g,tempfloatneg;
-    public String b,c,d,tempneg="";
+    public float e,f,g;
+    public String b,c,d="";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button point=findViewById(R.id.point);
         Button equal=findViewById(R.id.equal);
         Button back=findViewById(R.id.back);
+        TextView screen=findViewById(R.id.scree);
 
         b1.setOnClickListener(this);
         b2.setOnClickListener(this);
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         clear.setOnClickListener(this);
         rotate.setOnClickListener(this);
         add.setOnClickListener(this);
+        screen.setOnClickListener(this);
     }
 
 
@@ -111,21 +113,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 screen.setText(text);
                 break;
             case R.id.b0:
-                if(text!="0")
-                {
                 text=text+"0";
                 screen.setText(text);
-                }
                 break;
             case R.id.back:
-                if (text.length()!=0 && text!="0")
-                {
-                  text=text.substring(0,text.length()-1);
-                    screen.setText(text);
-                }
-                else{
-                    screen.setText("0");
-                }
                 break;
             case R.id.history:
                 break;
@@ -169,26 +160,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bracket:
                 break;
             case R.id.negative:
-                System.out.println(b+"  "+c+"  "+text);
-                if(b != ""){
-                    tempneg=d;
-                    tempneg=tempneg.replaceFirst(b,"");
-                    tempneg=tempneg.replace(c,"");
-                    tempfloatneg=Float.parseFloat(text);
-                    tempfloatneg=tempfloatneg*(-1);
-                    tempneg=Float.toString(tempfloatneg);
-                    text=b+c+tempneg;
-                    break;
-                }
-                if (text!=""){
                 e=Float.parseFloat(text);
                 e=e*(-1);
                 h=Float.toString(e);
                 text=h;
                 screen.setText(text);
                 break;
-                }
-
             case R.id.point:
                 if(text.contains(".")==false){
                 text=text+".";
@@ -208,8 +185,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.clear:
                 text="";
-                screen.setText("0");
-                a=0;
+                screen.setText(text);
                 break;
             case R.id.add:
                 if (a==0){
