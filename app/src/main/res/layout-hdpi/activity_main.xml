@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_weight="1"
     android:background="#FFFFFF"
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="633dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#FFFFFF"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,9 +21,11 @@
         <TextView
             android:id="@+id/scree"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="340dp"
             android:gravity="right"
             android:paddingTop="30dp"
+            android:text="0"
+            android:textColor="#000000"
             android:textSize="50sp" />
 
         <LinearLayout
@@ -37,7 +40,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:text="HISTORY"
-                android:textColor="#5A76FF" />
+                android:textColor="@color/black"
+                app:backgroundTint="#FFD6D6D6" />
 
             <Button
                 android:id="@+id/rotate"
@@ -45,15 +49,18 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Button"
-                android:textColor="#5A76FF" />
+                android:textColor="@color/black"
+                app:backgroundTint="#FFD6D6D6" />
 
             <Button
                 android:id="@+id/back"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:text="Button"
-                android:textColor="#5A76FF" />
+                android:layout_weight="3"
+                android:text="X"
+                android:textColor="@color/black"
+                app:backgroundTint="#FFD6D6D6" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -68,7 +75,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="c"
-                android:textColor="#4488FF" />
+                android:textColor="@color/black"
+                app:backgroundTint="#FFD6D6D6" />
 
             <Button
                 android:id="@+id/bracket"
@@ -76,7 +84,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="()"
-                android:textColor="#4488FF" />
+                android:textColor="@color/black"
+                app:backgroundTint="#FFD6D6D6" />
 
             <Button
                 android:id="@+id/percent"
@@ -84,7 +93,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="%"
-                android:textColor="#4488FF" />
+                android:textColor="@color/black"
+                app:backgroundTint="#FFD6D6D6" />
 
             <Button
                 android:id="@+id/divide"
@@ -92,7 +102,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="÷"
-                android:textColor="#5A76FF" />
+                android:textColor="@color/black"
+                app:backgroundTint="#FFD6D6D6" />
 
         </LinearLayout>
 
@@ -108,7 +119,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="1"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                app:backgroundTint="#FFD6D6D6" />
 
             <Button
                 android:id="@+id/b2"
@@ -116,7 +128,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="2"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                app:backgroundTint="#FFD6D6D6" />
 
             <Button
                 android:id="@+id/b3"
@@ -124,7 +137,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="3"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                app:backgroundTint="#FFD6D6D6" />
 
             <Button
                 android:id="@+id/multiply"
@@ -132,7 +146,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="X"
-                android:textColor="#4488FF" />
+                android:textColor="@color/black"
+                app:backgroundTint="#FFD6D6D6" />
         </LinearLayout>
 
         <LinearLayout
@@ -147,7 +162,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="4"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                app:backgroundTint="#FFD6D6D6" />
 
             <Button
                 android:id="@+id/b5"
@@ -155,7 +171,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="5"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                app:backgroundTint="#FFD6D6D6" />
 
             <Button
                 android:id="@+id/b6"
@@ -163,7 +180,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="6"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                app:backgroundTint="#FFD6D6D6" />
 
             <Button
                 android:id="@+id/sub"
@@ -171,7 +189,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="-"
-                android:textColor="#4488FF" />
+                android:textColor="@color/black"
+                app:backgroundTint="#FFD6D6D6" />
         </LinearLayout>
 
         <LinearLayout
@@ -186,7 +205,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="7"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                app:backgroundTint="#FFD6D6D6" />
 
             <Button
                 android:id="@+id/b8"
@@ -194,7 +214,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="8"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                app:backgroundTint="#FFD6D6D6" />
 
             <Button
                 android:id="@+id/b9"
@@ -202,7 +223,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="9"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                app:backgroundTint="#D6D6D6" />
 
             <Button
                 android:id="@+id/add"
@@ -210,7 +232,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="+"
-                android:textColor="#4488FF" />
+                android:textColor="@color/black"
+                app:backgroundTint="#FFD6D6D6" />
 
         </LinearLayout>
 
@@ -226,7 +249,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="."
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                app:backgroundTint="#FFD6D6D6" />
 
             <Button
                 android:id="@+id/b0"
@@ -234,7 +258,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="0"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                app:backgroundTint="#FFD6D6D6" />
 
             <Button
                 android:id="@+id/negative"
@@ -242,7 +267,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="+/-"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                app:backgroundTint="#FFD6D6D6" />
 
             <Button
                 android:id="@+id/equal"
