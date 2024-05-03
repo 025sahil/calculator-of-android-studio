@@ -6,15 +6,15 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import android.widget.TextView;
 
 
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
     public String text="",h="";
-    public float a=0;
-    public float e,f,g;
-    public String b,c,d="";
+    public float e;
+    public String d="";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,14 +30,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button b9=findViewById(R.id.b9);
         Button b0=findViewById(R.id.b0);
         Button history=findViewById(R.id.history);
-        Button rotate=findViewById(R.id.rotate);
+        Button rotate=findViewById(R.id.power);
         Button clear=findViewById(R.id.clear);
         Button add=findViewById(R.id.add);
         Button sub=findViewById(R.id.sub);
         Button multiply=findViewById(R.id.multiply);
         Button divide=findViewById(R.id.divide);
-        Button percent=findViewById(R.id.percent);
-        Button bracket=findViewById(R.id.bracket);
+        Button cbracket=findViewById(R.id.cbracket);
+        Button obracket=findViewById(R.id.obracket);
         Button negative=findViewById(R.id.negative);
         Button point=findViewById(R.id.point);
         Button equal=findViewById(R.id.equal);
@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sub.setOnClickListener(this);
         multiply.setOnClickListener(this);
         divide.setOnClickListener(this);
-        percent.setOnClickListener(this);
-        bracket.setOnClickListener(this);
+        cbracket.setOnClickListener(this);
+        obracket.setOnClickListener(this);
         negative.setOnClickListener(this);
         point.setOnClickListener(this);
         equal.setOnClickListener(this);
@@ -69,7 +69,102 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         add.setOnClickListener(this);
         screen.setOnClickListener(this);
     }
+        public static double eval(final String str) {
+            return new Object() {
+                int pos = -1, ch;
 
+                void nextChar() {
+                    ch = (++pos < str.length()) ? str.charAt(pos) : -1;
+                }
+
+                boolean eat(int charToEat) {
+                    while (ch == ' ') nextChar();
+                    if (ch == charToEat) {
+                        nextChar();
+                        return true;
+                    }
+                    return false;
+                }
+
+                double parse() {
+                    nextChar();
+                    double x = parseExpression();
+                    if (pos < str.length()) throw new RuntimeException("Unexpected: " + (char)ch);
+                    return x;
+                }
+
+                // Grammar:
+                // expression = term | expression `+` term | expression `-` term
+                // term = factor | term `*` factor | term `/` factor
+                // factor = `+` factor | `-` factor | `(` expression `)` | number
+                //        | functionName `(` expression `)` | functionName factor
+                //        | factor `^` factor
+
+                double parseExpression() {
+                    double x = parseTerm();
+                    for (;;) {
+                        if      (eat('+')) x += parseTerm(); // addition
+                        else if (eat('-')) x -= parseTerm(); // subtraction
+                        else return x;
+                    }
+                }
+
+                double parseTerm() {
+                    double x = parseFactor();
+                    for (;;) {
+                        if      (eat('*')) x *= parseFactor(); // multiplication
+                        else if (eat('÷')) x /= parseFactor(); // division
+                        else return x;
+                    }
+                }
+
+                double parseFactor() {
+                    if (eat('+')) return +parseFactor(); // unary plus
+                    if (eat('-')) return -parseFactor(); // unary minus
+
+                    double x;
+                    int startPos = this.pos;
+                    if (eat('(')) { // parentheses
+                        x = parseExpression();
+                        if (!eat(')')) throw new RuntimeException("Missing ')'");
+                    } else if ((ch >= '0' && ch <= '9') || ch == '.') { // numbers
+                        while ((ch >= '0' && ch <= '9') || ch == '.') nextChar();
+                        x = Double.parseDouble(str.substring(startPos, this.pos));
+                    } else if (ch >= 'a' && ch <= 'z') { // functions
+                        while (ch >= 'a' && ch <= 'z') nextChar();
+                        String func = str.substring(startPos, this.pos);
+                        if (eat('(')) {
+                            x = parseExpression();
+                            if (!eat(')')) throw new RuntimeException("Missing ')' after argument to " + func);
+                        } else {
+                            x = parseFactor();
+                        }
+                        switch (func) {
+                            case "sqrt":
+                                x = Math.sqrt(x);
+                                break;
+                            case "sin":
+                                x = Math.sin(Math.toRadians(x));
+                                break;
+                            case "cos":
+                                x = Math.cos(Math.toRadians(x));
+                                break;
+                            case "tan":
+                                x = Math.tan(Math.toRadians(x));
+                                break;
+                            default:
+                                throw new RuntimeException("Unknown function: " + func);
+                        }
+                    } else {
+                        throw new RuntimeException("Unexpected: " + (char)ch);
+                    }
+
+                    if (eat('^')) x = Math.pow(x, parseFactor()); // exponentiation
+
+                    return x;
+                }
+            }.parse();
+        }
 
     @SuppressLint("ResourceType")
     @Override
@@ -117,86 +212,61 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 screen.setText(text);
                 break;
             case R.id.back:
+                if (text.length() > 0){
+                    text=text.substring(0,text.length()-1);
+                }
+                screen.setText(text);
                 break;
             case R.id.history:
                 break;
             case R.id.sub:
-                if (a==0){
-                    b=text;
-                    c="-";
                     text=text+"-";
                     screen.setText(text);
-                    a++;
-                }
+
                 break;
             case R.id.multiply:
-                if (a==0){
-                    b=text;
-                    c="X";
-                    text=text+"X";
+                    text=text+"*";
                     screen.setText(text);
-                    a++;
-                }
                 break;
             case R.id.divide:
-                if (a==0){
-                    b=text;
-                    c="÷";
                     text=text+"÷";
                     screen.setText(text);
-                    a++;
-                }
                 break;
-            case R.id.percent:
-                text=text+"%";
-                d=text;
-                d=d.replace("%","");
-                e=Float.parseFloat(d);
-                e=e/100;
-                h=Float.toString(e);
-                text=h;
+            case R.id.obracket:
+                text=text+"(";
                 screen.setText(text);
                 break;
-            case R.id.bracket:
+            case R.id.cbracket:
+                text=text+")";
+                screen.setText(text);
                 break;
             case R.id.negative:
-                e=Float.parseFloat(text);
-                e=e*(-1);
-                h=Float.toString(e);
-                text=h;
+                text= "-(" +text+')';
                 screen.setText(text);
                 break;
             case R.id.point:
-                if(text.contains(".")==false){
                 text=text+".";
-                screen.setText(text);}
-                if(a!=0){
-                    d=text;
-                    d=d.replaceFirst(b,"");
-                    d=d.replace(c,"");
-                    if (d.contains(".")==false){
-                        text=text+".";
-                        screen.setText(text);
-                    }
-                    }
+                screen.setText(text);
                 break;
-
-            case R.id.rotate:
+            case R.id.power:
+                text=text+"^";
+                screen.setText(text);
                 break;
             case R.id.clear:
                 text="";
                 screen.setText(text);
                 break;
             case R.id.add:
-                if (a==0){
-                    b=text;
-                    c="+";
                     text=text+"+";
                     screen.setText(text);
-                    a++;
-                }
                 break;
             case R.id.equal:
+                try {
+                    text= String.valueOf(eval(text));
+                    screen.setText(text);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
 
                 break;
             default:
