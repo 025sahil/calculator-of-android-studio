@@ -12,7 +12,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public String text="",h="";
+    public String text="",history="";
+    public TextView screen;
     public float e;
     public String d="";
     @Override
@@ -42,7 +43,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button point=findViewById(R.id.point);
         Button equal=findViewById(R.id.equal);
         Button back=findViewById(R.id.back);
-        TextView screen=findViewById(R.id.scree);
+        screen=findViewById(R.id.scree);
+
 
         b1.setOnClickListener(this);
         b2.setOnClickListener(this);
@@ -67,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         clear.setOnClickListener(this);
         rotate.setOnClickListener(this);
         add.setOnClickListener(this);
-        screen.setOnClickListener(this);
     }
         public static double eval(final String str) {
             return new Object() {
@@ -169,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("ResourceType")
     @Override
     public void onClick(View v) {
-        TextView screen=findViewById(R.id.scree);
+
         switch (v.getId()){
             case R.id.b1:
                 text=text+"1";
@@ -218,6 +219,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 screen.setText(text);
                 break;
             case R.id.history:
+                text=history;
+                screen.setText(text);
                 break;
             case R.id.sub:
                     text=text+"-";
@@ -261,6 +264,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     screen.setText(text);
                 break;
             case R.id.equal:
+                history=text; //set last eqation solved in calculator as history
                 try {
                     text= String.valueOf(eval(text));
                     screen.setText(text);

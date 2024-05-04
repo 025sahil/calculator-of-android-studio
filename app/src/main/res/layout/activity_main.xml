@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,6 @@
                 android:layout_weight="1"
                 android:gravity="bottom|right"
                 android:paddingTop="30dp"
-                android:text="34"
                 android:textSize="24sp" />
 
         </LinearLayout>
@@ -50,20 +49,21 @@
                 android:textColor="#5A76FF" />
 
             <Button
-                android:id="@+id/power"
+                android:id="@+id/clear"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Button"
-                android:textColor="#5A76FF" />
+                android:text="c"
+                android:textColor="#4488FF" />
 
             <Button
                 android:id="@+id/back"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:text="Button"
+                android:text="@string/back"
                 android:textColor="#5A76FF" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -73,19 +73,19 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/clear"
+                android:id="@+id/power"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="c"
-                android:textColor="#4488FF" />
+                android:text="^"
+                android:textColor="#5A76FF" />
 
             <Button
                 android:id="@+id/obracket"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="()"
+                android:text="("
                 android:textColor="#4488FF" />
 
             <Button
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="%"
+                android:text=")"
                 android:textColor="#4488FF" />
 
             <Button
@@ -240,7 +240,7 @@
 
             <Button
                 android:id="@+id/b0"
-                android:layout_width="wrap_content"
+                android:layout_width="103dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="0"
@@ -261,7 +261,7 @@
                 android:layout_weight="1"
                 android:text="="
                 android:textColor="#FFFFFF"
-                app:backgroundTint="#5CDD61" />
+                app:backgroundTint="#55E16E" />
         </LinearLayout>
 
     </LinearLayout>
